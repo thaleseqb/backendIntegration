@@ -8,7 +8,7 @@ function getBookById(id) {
     const books = getAllBooks();
 
     const filteredBooks = books.filter(book => {
-        return Number(book.id) === id; 
+        return Number(book.id) === Number(id); 
     });
     const [book] = filteredBooks
 
@@ -24,7 +24,7 @@ function patchBook(modfications, id) {
     let books = getAllBooks();
     
     const modfiedIndex = books.findIndex(book => {
-        return book.id === id;
+        return Number(book.id) === Number(id);
     });
 
     const modfiedContent = {...books[modfiedIndex], ...modfications};
