@@ -1,4 +1,4 @@
-import { getAllBooks } from "../services/book.js";
+import { getAllBooks, getBookById } from "../services/book.js";
 
 function getBooks(req, res) {
     try {
@@ -10,4 +10,15 @@ function getBooks(req, res) {
     }
 }
 
-export { getBooks };
+function getById(req, res) {
+    try {
+        const id = req.params.id;
+        const book = getBookById(Number(id));
+        res.send(book);
+    } catch (error) {
+        res.status(500);
+        res.send(error.message);
+    }
+}
+
+export { getBooks, getById };
