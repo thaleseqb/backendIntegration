@@ -20,4 +20,19 @@ function addBook(body) {
     fs.writeFileSync("book.json", JSON.stringify([...books, body]));
 }
 
-export { getAllBooks, getBookById, addBook };
+function patchBook(modfications, id) {
+    let books = getAllBooks();
+    
+    const modfiedIndex = books.findIndex(book => {
+        return book.id === id;
+    });
+
+    const modfiedContent = {...books[modfiedIndex], ...modfications};
+
+    books[modfiedIndex] = modfiedContent;
+
+    fs.writeFileSync("book.json", JSON.stringify(books));
+
+}
+
+export { getAllBooks, getBookById, addBook, patchBook };
