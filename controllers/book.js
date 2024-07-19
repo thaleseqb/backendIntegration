@@ -1,4 +1,4 @@
-import { getAllBooks, getBookById } from "../services/book.js";
+import { addBook, getAllBooks, getBookById } from "../services/book.js";
 
 function getBooks(req, res) {
     try {
@@ -21,4 +21,15 @@ function getById(req, res) {
     }
 }
 
-export { getBooks, getById };
+function postBook(req, res) {
+    try {
+        addBook(req.body);
+        res.status(201);
+        res.send("Livro inserido com sucesso");
+    } catch (error) {
+        res.status(500);
+        res.send(error.message);
+    }
+}
+
+export { getBooks, getById, postBook };

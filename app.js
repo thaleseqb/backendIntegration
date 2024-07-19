@@ -2,6 +2,7 @@ import express from "express";
 import bookRoute from "./routes/book.js"
 
 const app = express();
+app.use(express.json());
 
 const port = 8000;
 

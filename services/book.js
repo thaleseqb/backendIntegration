@@ -15,4 +15,9 @@ function getBookById(id) {
     return book;
 }
 
-export { getAllBooks, getBookById };
+function addBook(body) {
+    const books = getAllBooks();
+    fs.writeFileSync("book.json", JSON.stringify([...books, body]));
+}
+
+export { getAllBooks, getBookById, addBook };
