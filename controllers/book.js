@@ -1,4 +1,4 @@
-import { addBook, getAllBooks, getBookById, patchBook } from "../services/book.js";
+import { addBook, deleteBook, getAllBooks, getBookById, patchBook } from "../services/book.js";
 
 function getBooks(req, res) {
     try {
@@ -43,4 +43,15 @@ function patchBookById(req, res) {
     }
 }
 
-export { getBooks, getById, postBook, patchBookById };
+function deleteBookById(req, res) {
+    try {
+        deleteBook(req.params.id);
+        res.status(200);
+        res.send("exclusão concluída com sucesso");
+    } catch (error) {
+        res.status(500);
+        res.send(error.message);        
+    }
+}
+
+export { getBooks, getById, postBook, patchBookById, deleteBookById };

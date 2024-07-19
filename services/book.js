@@ -35,4 +35,15 @@ function patchBook(modfications, id) {
 
 }
 
-export { getAllBooks, getBookById, addBook, patchBook };
+function deleteBook(id) {
+    const books = getAllBooks();
+
+    const bookIndex = books.findIndex(book => {
+        return Number(book.id) === Number(id);
+    });
+
+    books.splice(bookIndex, 1);
+    fs.writeFileSync("book.json", JSON.stringify(books));
+}
+
+export { getAllBooks, getBookById, addBook, patchBook, deleteBook };

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getBooks, getById, postBook, patchBookById } from "../controllers/book.js";
+import { getBooks, getById, postBook, patchBookById, deleteBookById } from "../controllers/book.js";
 
 const router = Router();
 
@@ -11,8 +11,6 @@ router.post("/", postBook);
 
 router.patch("/:id", patchBookById);
 
-router.delete("/", (req, res) => {
-    res.send("você fez uma requisão do tipo DELETE")
-});
+router.delete("/:id", deleteBookById);
 
 export default router;
