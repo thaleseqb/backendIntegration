@@ -1,11 +1,12 @@
 import fs from "fs";
+import {bookName} from "../fileNames.js";
 
-function getAllBooks() {
-    return JSON.parse(fs.readFileSync("book.json"));
+function getAllBooks(fileName) {
+    return JSON.parse(fs.readFileSync(fileName));
 }
 
 function getBookById(id) {
-    const books = getAllBooks();
+    const books = getAllBooks(bookName);
 
     const filteredBooks = books.filter(book => {
         return Number(book.id) === Number(id); 
@@ -16,12 +17,12 @@ function getBookById(id) {
 }
 
 function addBook(body) {
-    const books = getAllBooks();
-    fs.writeFileSync("book.json", JSON.stringify([...books, body]));
+    const books = getAllBooks(bookName);
+    fs.writeFileSync(bookName, JSON.stringify([...books, body]));
 }
 
 function patchBook(modfications, id) {
-    let books = getAllBooks();
+    let books = getAllBooks(bookName);
     
     const modfiedIndex = books.findIndex(book => {
         return Number(book.id) === Number(id);
@@ -31,19 +32,19 @@ function patchBook(modfications, id) {
 
     books[modfiedIndex] = modfiedContent;
 
-    fs.writeFileSync("book.json", JSON.stringify(books));
+    fs.writeFileSync(bookName, JSON.stringify(books));
 
 }
 
 function deleteBook(id) {
-    const books = getAllBooks();
+    const books = getAllBooks(bookName);
 
     const bookIndex = books.findIndex(book => {
         return Number(book.id) === Number(id);
     });
 
     books.splice(bookIndex, 1);
-    fs.writeFileSync("book.json", JSON.stringify(books));
+    fs.writeFileSync(bookName, JSON.stringify(books));
 }
 
 export { getAllBooks, getBookById, addBook, patchBook, deleteBook };

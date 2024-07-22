@@ -1,8 +1,9 @@
 import { addBook, deleteBook, getAllBooks, getBookById, patchBook } from "../services/book.js";
+import {bookName} from "../fileNames.js"
 
 function getBooks(req, res) {
     try {
-        const books = getAllBooks();
+        const books = getAllBooks(bookName);
         res.send(books);
     } catch (error) {
         res.status(500);
